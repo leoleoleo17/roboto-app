@@ -1,0 +1,2 @@
+Proyecto realizado por Juliana Bermúdez, Juan Andrés Castro, Sofía Duarte, Valentina López, David Leonardo Luengas, Sara Rodríguez, Ana María Triviño, Juan David Vargas
+para la clase de Cornerstone Project con el profesor David Felipe Gonzalez Rodríguez en el semestre 2022-2 en la Universidad del Rosario.
