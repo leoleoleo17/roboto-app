@@ -19,7 +19,6 @@ class Ui(ScreenManager):
 class MainApp(MDApp):
     def build(self):
         Builder.load_file('design.kv') #para la creación de los elementos de la app (widgets)
-
         return Ui()
 
 

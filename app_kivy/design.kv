@@ -1,10 +1,22 @@
 #: import SlideTransition kivy.uix.screenmanager.SlideTransition
 
+<Caja@MDFillRoundFlatIconButton>:
+    text: ''
+    theme_text_color: 'Custom'
+    text_color: 1,1,1,1
+    md_bg_color: 0.1992, 0.6602, 0.7070, 1
+    pos_hint: {'center_x':.5}
+    icon: ''
+    icon_size: '50sp'
+
+
+    
+
 <ui>:
     MDScreen:
         id: screen_principal
         name: 'screen_principal' #pantalla principal(inicio)
-        md_bg_color: 0, 0.9215, .8353, 1 #color en rgba
+        md_bg_color: 0.1992, 0.6602, 0.7070, 1 #color en rgba
 
         MDBoxLayout:
             orientation: 'vertical'
@@ -24,8 +36,8 @@
                 pos_hint: {'center_x': .5}
             
             MDLabel:
-                text: "El espacio donde aprender\nlenguaje de señas está\nal alcance de tu mano"
-                halign: 'center'
+                text: "El espacio donde aprender lenguaje de señas está al alcance de tu mano"
+                halign: 'justify'
                 pos_hint: {'center_y': .5}
                 theme_text_color: 'Custom'
                 text_color: 1,1,1,1
@@ -34,7 +46,7 @@
             MDFillRoundFlatButton: #un tipo de botón
                 text: '¡EMPIEZA YA!'
                 theme_text_color: 'Custom'
-                text_color: 1,.729,.2313,1
+                text_color: 1,0.6758,.0938,1
                 md_bg_color: 1,1,0.149, 1
                 pos_hint: {'center_x': .5}
                 on_release:
@@ -44,30 +56,44 @@
     MDScreen: #PENDIENTE!!!!
         id: menu
         name: 'menu' #pantalla menu
-        md_bg_color: .0235, .5686, .5255, .2 #color en rgba
+        md_bg_color: 0.1992, 0.6602, 0.7070, .2 #color en rgba
         MDIconButton:
             icon: 'arrow-left'
             pos_hint: {'center_x': 0.09,'center_y': .95}
             theme_icon_color: "Custom"
-            icon_color: .0235, .5686, .5255, 1
+            icon_color: 0.1992, 0.6602, 0.7070, 1
             on_release:
                 app.root.current = 'screen_principal'
                 app.root.transition = SlideTransition(direction = 'left')
         MDBoxLayout:
             orientation: 'vertical'
-            MDLabel:
-                text: 'EDITAR ESTA VENTANA!!!'
-                halign: 'center'
-                pos_hint: {'center_x': .5}
-                theme_text_color: 'Custom' #para poder cambiarle el color y el estilo
-                text_color: .9529,.6549,.2157,1
-                font_style: 'H5'
-                MDFillRoundFlatButton:
-                    text: 'ESCRIBE UN MENSAJE'
-                    pos_hint: {'center_x': .5}
-                    on_release:
-                        app.root.current = 'escribir_mensaje'
-                        app.root.transition = SlideTransition(direction = 'right')
+            orientation: 'vertical'
+            padding: ['10dp', '10dp', '10dp', '280px']
+            FloatLayout:
+                canvas:
+                    Color:
+                        rgba: 0.1992, 0.6602, 0.7070, .2
+                    Ellipse:
+                        pos: -15, 400
+                        size: 300 , 200
+                        angle_start: 0
+                        angle_end: 360
+                MDLabel:
+                    text: '¿QUÉ QUIERES HACER?'
+                    halign: 'center'
+                    pos_hint: {'center_x': .5, 'center_y': .75}
+                    theme_text_color: 'Custom' #para poder cambiarle el color y el estilo
+                    text_color: .9529,.6549,.2157,1
+                    font_style: 'H5'
+            Caja:
+                text: 'Conoce un \n poco de historia'
+                icon: 'images/globe.png'
+            MDFillRoundFlatButton:
+                text: 'ESCRIBE UN MENSAJE'
+                pos_hint: {'center_y': .5}
+                on_release:
+                    app.root.current = 'escribir_mensaje'
+                    app.root.transition = SlideTransition(direction = 'right')
 
     MDScreen:
         id: escribir_mensaje
@@ -77,7 +103,7 @@
             icon: 'arrow-left'
             pos_hint: {'center_x': 0.09,'center_y': .95}
             theme_icon_color: "Custom"
-            icon_color: .0235, .5686, .5255, 1
+            icon_color: 0.1992, 0.6602, 0.7070, 1
             on_release:
                 app.root.current = 'menu'
                 app.root.transition = SlideTransition(direction = 'left')
@@ -87,7 +113,7 @@
             FloatLayout:
                 canvas:
                     Color:
-                        rgba: .0235, .5686, .5255, .2
+                        rgba: 0.1992, 0.6602, 0.7070, .2
                     Ellipse:
                         pos: -15, 400
                         size: 300 , 200
