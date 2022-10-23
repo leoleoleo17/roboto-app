@@ -1,16 +1,15 @@
 #: import SlideTransition kivy.uix.screenmanager.SlideTransition
 
 <Caja@MDFillRoundFlatIconButton>:
+    md_bg_color: 0.1992, 0.6602, 0.7070, 1
+    icon: ''
     text: ''
     theme_text_color: 'Custom'
     text_color: 1,1,1,1
-    md_bg_color: 0.1992, 0.6602, 0.7070, 1
-    pos_hint: {'center_x':.5}
-    icon: ''
-    icon_size: '50sp'
-
-
-    
+    theme_icon_color: "Custom"
+    icon_color: 0, 0, 0, 1
+    font_size:'15sp'
+        
 
 <ui>:
     MDScreen:
@@ -67,7 +66,6 @@
                 app.root.transition = SlideTransition(direction = 'left')
         MDBoxLayout:
             orientation: 'vertical'
-            orientation: 'vertical'
             padding: ['10dp', '10dp', '10dp', '280px']
             FloatLayout:
                 canvas:
@@ -85,15 +83,33 @@
                     theme_text_color: 'Custom' #para poder cambiarle el color y el estilo
                     text_color: .9529,.6549,.2157,1
                     font_style: 'H5'
-            Caja:
-                text: 'Conoce un \n poco de historia'
-                icon: 'images/globe.png'
-            MDFillRoundFlatButton:
-                text: 'ESCRIBE UN MENSAJE'
-                pos_hint: {'center_y': .5}
-                on_release:
-                    app.root.current = 'escribir_mensaje'
-                    app.root.transition = SlideTransition(direction = 'right')
+            
+        Caja:
+            pos_hint: {'center_x':.5, 'center_y': .6}
+            text: 'Conoce un \n poco de historia'
+            icon: 'book'
+        Caja:
+            pos_hint: {'center_x':.5, 'center_y': .48}
+            text: 'Conoce el \n abecedario'
+            icon: 'glasses'
+        Caja:
+            text: 'Experimenta \n creando un mensaje'
+            pos_hint: {'center_x': .5, 'center_y': .36}
+            on_release:
+                app.root.current = 'escribir_mensaje'
+                app.root.transition = SlideTransition(direction = 'right')
+            icon: 'pencil'        
+        Caja:
+            pos_hint: {'center_x':.5, 'center_y': .24}
+            text: 'Conoce más sobre\n la lengua de señas'
+            icon: 'hand-extended'
+        MDIconButton:
+            icon: 'information'
+            pos_hint: {"center_x": .91, "center_y": .05}
+            theme_icon_color: "Custom"
+            icon_color: 0.1992, 0.6602, 0.7070, 1
+            
+                    
 
     MDScreen:
         id: escribir_mensaje
