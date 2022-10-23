@@ -88,6 +88,9 @@
             pos_hint: {'center_x':.5, 'center_y': .6}
             text: 'Conoce un \n poco de historia'
             icon: 'book'
+            on_release:
+                app.root.current = 'historia'
+                app.root.transition = SlideTransition(direction = 'left')
         Caja:
             pos_hint: {'center_x':.5, 'center_y': .48}
             text: 'Conoce el \n abecedario'
@@ -103,13 +106,16 @@
             pos_hint: {'center_x':.5, 'center_y': .24}
             text: 'Conoce más sobre\n la lengua de señas'
             icon: 'hand-extended'
+            on_release:
+                app.root.current = 'lengua-señas'
+                app.root.transition = SlideTransition(direction = 'left')
         MDIconButton:
             icon: 'information'
             pos_hint: {"center_x": .91, "center_y": .05}
             theme_icon_color: "Custom"
             icon_color: 0.1992, 0.6602, 0.7070, 1
             
-                    
+#Pantalla Mensaje                   
 
     MDScreen:
         id: escribir_mensaje
@@ -179,7 +185,7 @@
             text_color: 0, 0, 0, .5
             font_style: 'Caption'
         
-       
+#Pantalla Historia    
     MDScreen:
         id: historia
         name: 'historia'
@@ -195,12 +201,12 @@
 
         MDBoxLayout:
             orientation: 'vertical'
-            padding : '4px'
+            padding : '8px'
 
             MDBoxLayout:
                 orientation: 'vertical'
                 size_hint: 1, .2
-                padding: '50px'
+                padding: '30px'
 
                 FloatLayout:
                     canvas:
@@ -220,34 +226,35 @@
 
             MDBoxLayout:
                 orientation: 'vertical'
-                size_hint: 1, .9
-                padding: '10px'
+                #size_hint: 1, .9
+                padding: '20px'
 
                 MDLabel:
                     text: "La lengua de señas colombiana fue reconocida oficialmente en el año 1996, durante el gobierno de Ernesto Samper, a través de la Ley 324 de 1996."
                     halign: 'justify'
-                    pos_hint: {'center_y': .5}
+                    pos_hint: {'center_x': .5}
                     theme_text_color: 'Custom' 
                     text_color: .0, .0, .0, 1
-                    font_style: 'Subtitle1'
+                    font_size:'15sp'
 
                 MDLabel:
-                    text: "En 1984 empezó la creación de un grupo de investigación cuyo propósito fue la elaboración de lo que, en un principio, se llamó el lenguaje manual colombiano. "
+                    text: "En 1984 empezó la creación de un grupo de investigación cuyo propósito fue la elaboración de lo que, en un principio, se llamó el lenguaje manual colombiano."
                     halign: 'justify'
-                    pos_hint: {'center_y': .5}
+                    pos_hint: {'center_x': .5}
                     theme_text_color: 'Custom' 
                     text_color: .0, .0, .0, 1
-                    font_style: 'Subtitle1'
+                    font_size:'15sp'
                 
                 MDLabel:
                     text: "De estos primeros pasos y la enseñanza de dicha lengua, salieron las primeras cartillas realizadas por la Federación Nacional de Sordos de Colombia (también conocida como Fenascol), publicadas inicialmente en 1993."
                     halign: 'justify'
-                    pos_hint: {'center_y': .5}
+                    pos_hint: {'center_x': .5}
                     theme_text_color: 'Custom' 
                     text_color: .0, .0, .0, 1
-                    font_style: 'Subtitle1'
+                    font_size:'15sp'
                 
             MDFillRoundFlatButton:
+                md_bg_color: 0.1992, 0.6602, 0.7070, 1  
                 text: 'MÁS'
                 on_release:
                     app.root.current = 'historia2'
@@ -273,7 +280,7 @@
             MDBoxLayout:
                 orientation: 'vertical'
                 size_hint: 1, .2
-                padding: '50px'
+                padding: '30px'
 
                 FloatLayout:
                     canvas:
@@ -294,7 +301,7 @@
             MDBoxLayout:
                 orientation: 'vertical'
                 size_hint: 1, .9
-                padding: '10px'
+                padding: '20px'
 
                 MDLabel:
                     text: "Después de estas primeras cartillas, más personas se unieron a esta iniciativa, avanzando en la investigación."
@@ -302,7 +309,7 @@
                     pos_hint: {'center_y': .5}
                     theme_text_color: 'Custom' 
                     text_color: .0, .0, .0, 1
-                    font_style: 'Subtitle1'
+                    font_size:'15sp'
 
                 MDLabel:
                     text: "Por tanto, el tomo dos inicia con la aclaración que la correcta denominación es Lenguaje de señas colombiano."
@@ -310,7 +317,7 @@
                     pos_hint: {'center_y': .5}
                     theme_text_color: 'Custom' 
                     text_color: .0, .0, .0, 1
-                    font_style: 'Subtitle1'
+                    font_size:'15sp'
                 
                 MDLabel:
                     text: "Gracias a esto y al trabajo entre el INSOR (Instituto Nacional para Sordos), el Instituto Caro y Cuervo y Fenascol, en 2006 se publica el Diccionario Básico de la lengua de señas colombiana."
@@ -318,15 +325,16 @@
                     pos_hint: {'center_y': .5}
                     theme_text_color: 'Custom' 
                     text_color: .0, .0, .0, 1
-                    font_style: 'Subtitle1'
+                    font_size:'15sp'
 
             MDFillRoundFlatButton:
+                md_bg_color: 0.1992, 0.6602, 0.7070, 1
                 text: 'Haz click para conocer la fuente'
                 on_release:
                     import webbrowser
                     webbrowser.open('https://lenguasdecolombia.caroycuervo.gov.co/contenido/Lenguas-de-senas-colombiana/introduccion#:~:text=La%20lengua%20de%20se%C3%B1as%20colombiana%20es%20la%20lengua%20utilizada%20por,Pizano%2C%20mediante%20la%20Ley%20324.')
 
-
+#Pantalla conoce más sobre lengua de señas
 
     MDScreen:
         id: lengua-señas
@@ -368,7 +376,7 @@
             MDBoxLayout:
                 orientation: 'vertical'
                 size_hint: 1, .9
-                padding: '10px'
+                padding: '20px'
 
                 MDLabel:
                     text: "La lengua de señas es la lengua natural de las personas con dificultad auditiva."
@@ -376,7 +384,7 @@
                     pos_hint: {'center_y': .5}
                     theme_text_color: 'Custom' 
                     text_color: .0, .0, .0, 1
-                    font_style: 'Subtitle1'    
+                    font_size:'15sp'   
 
                 MDLabel:
                     text: "Se basa en movimientos y expresiones de las manos, la cara y el cuerpo. A estos movimientos se les denomina señas."
@@ -384,7 +392,7 @@
                     pos_hint: {'center_y': .5}
                     theme_text_color: 'Custom' 
                     text_color: .0, .0, .0, 1
-                    font_style: 'Subtitle1'    
+                    font_size:'15sp'    
 
                 MDLabel:
                     text: "Muchas personas con dificultad auditiva se comunican a través de esta lengua y en algunos casos, necesitan de un interprete para relacionarse con oyentes que no la conocen."
@@ -392,7 +400,7 @@
                     pos_hint: {'center_y': .5}
                     theme_text_color: 'Custom' 
                     text_color: .0, .0, .0, 1
-                    font_style: 'Subtitle1'    
+                    font_size:'15sp'    
 
                 MDLabel:
                     text: "En Colombia se le llama Lengua de Señas Colombiana."
@@ -400,6 +408,6 @@
                     pos_hint: {'center_y': .5}
                     theme_text_color: 'Custom' 
                     text_color: .0, .0, .0, 1
-                    font_style: 'Subtitle1'    
+                    font_size:'15sp'    
         
                 
