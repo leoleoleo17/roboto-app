@@ -1,21 +1,36 @@
 #: import SlideTransition kivy.uix.screenmanager.SlideTransition
 
+#plantilla para botones del menu de inicio
 <Caja@MDFillRoundFlatIconButton>:
     md_bg_color: 0.1992, 0.6602, 0.7070, 1
-    icon: ''
-    text: ''
-    theme_text_color: 'Custom'
+    icon: '' #se llena al usar el widget
+    text: '' #se llena al usar el widget
+    theme_text_color: 'Custom' #para cambiarle el color en rgba
     text_color: 1,1,1,1
     theme_icon_color: "Custom"
     icon_color: 0, 0, 0, 1
     font_size:'15sp'
-        
+
+#plantilla para hacer un texto con Scroll (para textos muy largos)
+<LabelScroll@MDBoxLayout>:
+    orientation: 'vertical'
+    text: '' #se llena al usar el widget
+    
+    ScrollView:
+        Label:
+            size_hint_y: None
+            halign: 'justify'
+            height: self.texture_size[1]
+            text_size: self.width, None
+            text: root.text #el text de arriba
+            color: [0,0,0,.7]
 
 <ui>:
+#Pantalla de inicio
     MDScreen:
         id: screen_principal
-        name: 'screen_principal' #pantalla principal(inicio)
-        md_bg_color: 0.1992, 0.6602, 0.7070, 1 #color en rgba
+        name: 'screen_principal'
+        md_bg_color: 0.1992, 0.6602, 0.7070, 1
 
         MDBoxLayout:
             orientation: 'vertical'
@@ -25,7 +40,7 @@
                 text: "¡Bienvenido a Roboto!"
                 halign: 'center'
                 pos_hint: {'center_y': .5}
-                theme_text_color: 'Custom' #para poder cambiarle el color y el estilo
+                theme_text_color: 'Custom'
                 text_color: 1,1,1,1
                 font_style: 'H5'
 
@@ -42,7 +57,7 @@
                 text_color: 1,1,1,1
                 font_style: 'Subtitle1'
             
-            MDFillRoundFlatButton: #un tipo de botón
+            MDFillRoundFlatButton:
                 text: '¡EMPIEZA YA!'
                 theme_text_color: 'Custom'
                 text_color: 1,0.6758,.0938,1
@@ -51,11 +66,12 @@
                 on_release:
                     app.root.current= 'menu'
                     app.root.transition = SlideTransition(direction='right')
-    
-    MDScreen: #PENDIENTE!!!!
+
+#Pantalla de menu    
+    MDScreen: 
         id: menu
-        name: 'menu' #pantalla menu
-        md_bg_color: 0.1992, 0.6602, 0.7070, .2 #color en rgba
+        name: 'menu'
+        md_bg_color: 1,1,1,1
         MDIconButton:
             icon: 'arrow-left'
             pos_hint: {'center_x': 0.09,'center_y': .95}
@@ -80,8 +96,8 @@
                     text: '¿QUÉ QUIERES HACER?'
                     halign: 'center'
                     pos_hint: {'center_x': .5, 'center_y': .75}
-                    theme_text_color: 'Custom' #para poder cambiarle el color y el estilo
-                    text_color: .9529,.6549,.2157,1
+                    theme_text_color: 'Custom'
+                    text_color: .0235, .5686, .5255, 1
                     font_style: 'H5'
             
         Caja:
@@ -114,6 +130,9 @@
             pos_hint: {"center_x": .91, "center_y": .05}
             theme_icon_color: "Custom"
             icon_color: 0.1992, 0.6602, 0.7070, 1
+            on_release:
+                app.root.current = 'info'
+                app.root.transition = SlideTransition(direction = 'right')
             
 #Pantalla Mensaje                   
 
@@ -145,7 +164,7 @@
                 text: "ESCRIBE TU\nMENSAJE\n\n\n\n\n\n"
                 halign: 'center'
                 pos_hint: {'center_y': 1}
-                theme_text_color: 'Custom' #para poder cambiarle el color y el estilo
+                theme_text_color: 'Custom'
                 text_color: .0235, .5686, .5255, 1
                 font_style: 'H5'
             MDTextField:
@@ -167,21 +186,21 @@
                 helper_text_color_normal: 0, 0, 0, .5
                 helper_text_color_focus: 0, 0, 0, .5
                 #Color de fondo
-                fill_color_normal: .9647, .9647, .9647, 1 #pendiente
+                fill_color_normal: .9647, .9647, .9647, 1
 
         MDFillRoundFlatButton:
             text: 'ENVIAR'
             pos_hint: {'center_x': .5, 'center_y':.25}
             theme_text_color: 'Custom'
             text_color: 1,1,1,1
-            md_bg_color: .0235, .5686, .5255, 1
+            md_bg_color: 0.1992, 0.6602, 0.7070, 1
             on_release:
                 app.root.textInput(mensaje)
         MDLabel:
             text: '*Recuerda que tu mensaje no va a ser\n traducido directamente a lengua de señas,\n sino que se va a deletrear cada letra.'
             halign: 'left'
             pos_hint: {'center_y': 0.09, 'center_x':0.56}
-            theme_text_color: 'Custom' #para poder cambiarle el color y el estilo
+            theme_text_color: 'Custom'
             text_color: 0, 0, 0, .5
             font_style: 'Caption'
         
@@ -189,7 +208,7 @@
     MDScreen:
         id: historia
         name: 'historia'
-        md_bg_color: .0235, .5686, .5255, .2
+        md_bg_color: 1,1,1,1
         MDIconButton:
             icon: 'arrow-left'
             pos_hint: {'center_x': 0.09,'center_y': .95}
@@ -199,133 +218,28 @@
                 app.root.current = 'menu'
                 app.root.transition = SlideTransition(direction = 'left')
 
+        FloatLayout:
+            canvas:
+                Color:
+                    rgba: 0.1992, 0.6602, 0.7070, .2
+                Ellipse:
+                    pos: -15, 400
+                    size: 300 , 200
+                    angle_start: 0
+                    angle_end: 360
+            MDLabel:
+                text: 'HISTORIA DE LA LENGUA DE SEÑAS'
+                halign: 'center'
+                pos_hint: {'center_x': .5, 'center_y': .89}
+                theme_text_color: 'Custom'
+                text_color: .0235, .5686, .5255, 1
+                font_style: 'H5'
         MDBoxLayout:
             orientation: 'vertical'
-            padding : '8px'
-
-            MDBoxLayout:
-                orientation: 'vertical'
-                size_hint: 1, .2
-                padding: '30px'
-
-                FloatLayout:
-                    canvas:
-                        Color:
-                            rgba: .0235, .5686, .5255, .2
-                        Rectangle:
-                            pos: 0, 430
-                            size: 700 , 300
-
-                MDLabel:
-                    text: "Historia de la lengua de señas"
-                    halign: 'center'
-                    pos_hint: {'center_y': .5}
-                    theme_text_color: 'Custom' 
-                    text_color: .200, .165, .43, 1
-                    font_style: 'H5'
-
-            MDBoxLayout:
-                orientation: 'vertical'
-                #size_hint: 1, .9
-                padding: '20px'
-
-                MDLabel:
-                    text: "La lengua de señas colombiana fue reconocida oficialmente en el año 1996, durante el gobierno de Ernesto Samper, a través de la Ley 324 de 1996."
-                    halign: 'justify'
-                    pos_hint: {'center_x': .5}
-                    theme_text_color: 'Custom' 
-                    text_color: .0, .0, .0, 1
-                    font_size:'15sp'
-
-                MDLabel:
-                    text: "En 1984 empezó la creación de un grupo de investigación cuyo propósito fue la elaboración de lo que, en un principio, se llamó el lenguaje manual colombiano."
-                    halign: 'justify'
-                    pos_hint: {'center_x': .5}
-                    theme_text_color: 'Custom' 
-                    text_color: .0, .0, .0, 1
-                    font_size:'15sp'
-                
-                MDLabel:
-                    text: "De estos primeros pasos y la enseñanza de dicha lengua, salieron las primeras cartillas realizadas por la Federación Nacional de Sordos de Colombia (también conocida como Fenascol), publicadas inicialmente en 1993."
-                    halign: 'justify'
-                    pos_hint: {'center_x': .5}
-                    theme_text_color: 'Custom' 
-                    text_color: .0, .0, .0, 1
-                    font_size:'15sp'
-                
-            MDFillRoundFlatButton:
-                md_bg_color: 0.1992, 0.6602, 0.7070, 1  
-                text: 'MÁS'
-                on_release:
-                    app.root.current = 'historia2'
-                    app.root.transition = SlideTransition(direction = 'right')
-
-
-    MDScreen:
-        id: historia2
-        name: 'historia2'
-        md_bg_color: .0235, .5686, .5255, .2
-        MDIconButton:
-            icon: 'arrow-left'
-            pos_hint: {'center_x': 0.09,'center_y': .95}
-            theme_icon_color: "Custom"
-            icon_color: .0235, .5686, .5255, 1
-            on_release:
-                app.root.current = 'historia'
-                app.root.transition = SlideTransition(direction = 'left')
-
-        MDBoxLayout:
-            orientation: 'vertical'
-            padding : '4px'
-            MDBoxLayout:
-                orientation: 'vertical'
-                size_hint: 1, .2
-                padding: '30px'
-
-                FloatLayout:
-                    canvas:
-                        Color:
-                            rgba: .0235, .5686, .5255, .2
-                        Rectangle:
-                            pos: 0, 430
-                            size: 700 , 300
-
-                MDLabel:
-                    text: "Historia de la lengua de señas"
-                    halign: 'center'
-                    pos_hint: {'center_y': .5}
-                    theme_text_color: 'Custom' 
-                    text_color: .200, .165, .43, 1
-                    font_style: 'H5'
-
-            MDBoxLayout:
-                orientation: 'vertical'
-                size_hint: 1, .9
-                padding: '20px'
-
-                MDLabel:
-                    text: "Después de estas primeras cartillas, más personas se unieron a esta iniciativa, avanzando en la investigación."
-                    halign: 'justify'
-                    pos_hint: {'center_y': .5}
-                    theme_text_color: 'Custom' 
-                    text_color: .0, .0, .0, 1
-                    font_size:'15sp'
-
-                MDLabel:
-                    text: "Por tanto, el tomo dos inicia con la aclaración que la correcta denominación es Lenguaje de señas colombiano."
-                    halign: 'justify'
-                    pos_hint: {'center_y': .5}
-                    theme_text_color: 'Custom' 
-                    text_color: .0, .0, .0, 1
-                    font_size:'15sp'
-                
-                MDLabel:
-                    text: "Gracias a esto y al trabajo entre el INSOR (Instituto Nacional para Sordos), el Instituto Caro y Cuervo y Fenascol, en 2006 se publica el Diccionario Básico de la lengua de señas colombiana."
-                    halign: 'justify'
-                    pos_hint: {'center_y': .5}
-                    theme_text_color: 'Custom' 
-                    text_color: .0, .0, .0, 1
-                    font_size:'15sp'
+            padding: '17dp'
+            LabelScroll:
+                text: "La lengua de señas colombiana fue reconocida oficialmente en el año 1996, durante el gobierno de Ernesto Samper, a través de la Ley 324 de 1996.\n\nEn 1984 empezó la creación de un grupo de investigación cuyo propósito fue la elaboración de lo que, en un principio, se llamó el lenguaje manual colombiano.\n\nDe estos primeros pasos y la enseñanza de dicha lengua, salieron las primeras cartillas realizadas por la Federación Nacional de Sordos de Colombia (también conocida como Fenascol), publicadas inicialmente en 1993.\n\nDespués de estas primeras cartillas, más personas se unieron a esta iniciativa, avanzando en la investigación.\n\nPor tanto, el tomo dos inicia con la aclaración que la correcta denominación es Lenguaje de señas colombiano.\n\nGracias a esto y al trabajo entre el INSOR (Instituto Nacional para Sordos), el Instituto Caro y Cuervo y Fenascol, en 2006 se publica el Diccionario Básico de la lengua de señas colombiana."
+                padding: [0, '130px', 0, '10px']
 
             MDFillRoundFlatButton:
                 md_bg_color: 0.1992, 0.6602, 0.7070, 1
@@ -339,7 +253,7 @@
     MDScreen:
         id: lengua-señas
         name: 'lengua-señas'
-        md_bg_color: .0235, .5686, .5255, .2
+        md_bg_color: 1,1,1,1
         MDIconButton:
             icon: 'arrow-left'
             pos_hint: {'center_x': 0.09,'center_y': .95}
@@ -349,65 +263,75 @@
                 app.root.current = 'menu'
                 app.root.transition = SlideTransition(direction = 'left')
 
+        FloatLayout:
+            canvas:
+                Color:
+                    rgba: 0.1992, 0.6602, 0.7070, .2
+                Ellipse:
+                    pos: -15, 400
+                    size: 300 , 200
+                    angle_start: 0
+                    angle_end: 360
+            MDLabel:
+                text: 'ACERCA DE LA\nLENGUA DE SEÑAS'
+                halign: 'center'
+                pos_hint: {'center_x': .5, 'center_y': .89}
+                theme_text_color: 'Custom'
+                text_color: .0235, .5686, .5255, 1
+                font_style: 'H5'
+                    
         MDBoxLayout:
             orientation: 'vertical'
-            padding : '4px'
-            MDBoxLayout:
-                orientation: 'vertical'
-                size_hint: 1, .2
-                padding: '50px'
+            padding: ['17dp', '115px', '17dp', '17dp']
 
-                FloatLayout:
-                    canvas:
-                        Color:
-                            rgba: .0235, .5686, .5255, .2
-                        Rectangle:
-                            pos: 0, 430
-                            size: 700 , 300
-
-                MDLabel:
-                    text: "Acerca de la lengua de señas"
-                    halign: 'center'
-                    pos_hint: {'center_y': .5}
-                    theme_text_color: 'Custom' 
-                    text_color: .200, .165, .43, 1
-                    font_style: 'H5'
-
-            MDBoxLayout:
-                orientation: 'vertical'
-                size_hint: 1, .9
-                padding: '20px'
-
-                MDLabel:
-                    text: "La lengua de señas es la lengua natural de las personas con dificultad auditiva."
-                    halign: 'justify'
-                    pos_hint: {'center_y': .5}
-                    theme_text_color: 'Custom' 
-                    text_color: .0, .0, .0, 1
-                    font_size:'15sp'   
-
-                MDLabel:
-                    text: "Se basa en movimientos y expresiones de las manos, la cara y el cuerpo. A estos movimientos se les denomina señas."
-                    halign: 'justify'
-                    pos_hint: {'center_y': .5}
-                    theme_text_color: 'Custom' 
-                    text_color: .0, .0, .0, 1
-                    font_size:'15sp'    
-
-                MDLabel:
-                    text: "Muchas personas con dificultad auditiva se comunican a través de esta lengua y en algunos casos, necesitan de un interprete para relacionarse con oyentes que no la conocen."
-                    halign: 'justify'
-                    pos_hint: {'center_y': .5}
-                    theme_text_color: 'Custom' 
-                    text_color: .0, .0, .0, 1
-                    font_size:'15sp'    
-
-                MDLabel:
-                    text: "En Colombia se le llama Lengua de Señas Colombiana."
-                    halign: 'justify'
-                    pos_hint: {'center_y': .5}
-                    theme_text_color: 'Custom' 
-                    text_color: .0, .0, .0, 1
-                    font_size:'15sp'    
+            MDLabel:
+                text: "La lengua de señas es la lengua natural de las personas con discapacidad auditiva.\n\nSe basa en movimientos y expresiones de las manos, la cara y el cuerpo. A estos movimientos se les denomina señas.\n\nMuchas personas con discapacidad auditiva se comunican a través de esta lengua y en algunos casos, necesitan de un interprete para relacionarse con oyentes que no la conocen.\n\nEn Colombia se le llama Lengua de Señas Colombiana."
+                halign: 'justify'
+                theme_text_color: 'Custom'
+                text_color: .0, .0, .0, 0.7
+                font_size:'14sp'
         
                 
+#Pantalla boton informacion
+
+    MDScreen:
+        id: info
+        name: 'info'
+        md_bg_color: 1, 1, 1, 1
+
+        MDIconButton:
+            icon: 'arrow-left'
+            pos_hint: {'center_x': 0.09,'center_y': .95}
+            theme_icon_color: "Custom"
+            icon_color: 0.1992, 0.6602, 0.7070, 1
+            on_release:
+                app.root.current = 'menu'
+                app.root.transition = SlideTransition(direction = 'left')
+
+        FloatLayout:
+            canvas:
+                Color:
+                    rgba: 0.1992, 0.6602, 0.7070, .2
+                Ellipse:
+                    pos: -15, 400
+                    size: 300 , 200
+                    angle_start: 0
+                    angle_end: 360
+            MDLabel:
+                text: 'APRENDE A USAR ROBOTO'
+                halign: 'center'
+                pos_hint: {'center_x': .5, 'center_y': .87}
+                theme_text_color: 'Custom'
+                text_color: .0235, .5686, .5255, 1
+                font_style: 'H5'
+                    
+        MDBoxLayout:
+            orientation: 'vertical'
+            padding: ['17dp', '115px', '17dp', '17dp']
+
+            MDLabel:
+                text: "Roboto es una mano robótica que toma texto escrito por ti y lo deletrea utilizando el abecedario en lengua de señas colombiana. \n\nHaz click en el botón EXPERIMENTA CREANDO UN MENSAJE para enviar un mensaje a Roboto para que lo deletree. \n\nSi quieres ver la seña correspondiente a cada letra, puedes dar click en el botón CONOCE EL ABECEDARIO.\n\nPara conocer más acerca de la lengua de señas, da click en el botón CONOCE UN POCO DE HISTORIA o CONOCE MÁS SOBRE LA LENGUA DE SEÑAS."
+                halign: 'justify'
+                theme_text_color: 'Custom'
+                text_color: .0, .0, .0, 0.7
+                font_size:'14sp'
