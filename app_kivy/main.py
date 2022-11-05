@@ -19,10 +19,14 @@ class Ui(ScreenManager):
         else:
             self.ids.mensaje.helper_text = '¡No envíes un mensaje vacío!'
 
+    def buttonInput(self, string):
+        self.message = string
+        print(self.message)
+
 class MainApp(MDApp):
 
     def build(self):
-        Builder.load_file('design.kv') #para la creación de los elementos de la app (widgets)
+        Builder.load_file('CornerLayout.py') #para la creación de los elementos de la app (widgets)
         return Ui()
 
 if __name__ == "__main__":
