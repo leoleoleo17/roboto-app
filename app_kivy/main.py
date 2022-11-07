@@ -11,7 +11,7 @@ class Ui(ScreenManager):
     def textInput(self, widget):
         if widget.text!='' and len(widget.text)<=160:
             self.message = widget.text
-            print(self.message)
+            print(self.message.lower())
             self.ids.mensaje.helper_text = 'Escribe un mensaje'
             self.ids.mensaje.text = ''
         elif len(widget.text)>160:
@@ -21,7 +21,7 @@ class Ui(ScreenManager):
 
     def buttonInput(self, string):
         self.message = string
-        print(self.message)
+        print(self.message.lower())
 
 class MainApp(MDApp):
 
