@@ -5,7 +5,7 @@ from kivy.core.window import Window
 import string
 import unidecode
 
-Window.size=(270,530)
+Window.size=(720,1480)
 
 class Ui(ScreenManager):
     message = ''
