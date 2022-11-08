@@ -2,6 +2,8 @@ from kivymd.app import MDApp
 from kivy.uix.screenmanager import ScreenManager
 from kivy.lang import Builder
 from kivy.core.window import Window
+import string
+import unidecode
 
 Window.size=(270,530)
 
@@ -10,8 +12,8 @@ class Ui(ScreenManager):
     
     def textInput(self, widget):
         if widget.text!='' and len(widget.text)<=160:
-            self.message = widget.text
-            print(self.message.lower())
+            self.message = unidecode.unidecode(widget.text.lower().translate(str.maketrans('', '', string.punctuation)))
+            print(self.message)
             self.ids.mensaje.helper_text = 'Escribe un mensaje'
             self.ids.mensaje.text = ''
         elif len(widget.text)>160:
@@ -20,8 +22,8 @@ class Ui(ScreenManager):
             self.ids.mensaje.helper_text = '¡No envíes un mensaje vacío!'
 
     def buttonInput(self, string):
-        self.message = string
-        print(self.message.lower())
+        self.message = string.lower()
+        print(self.message)
 
 class MainApp(MDApp):
 
