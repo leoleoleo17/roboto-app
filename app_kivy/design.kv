@@ -10,7 +10,7 @@
     text_color: 1,1,1,1
     theme_icon_color: "Custom"
     icon_color: 0, 0, 0, 1
-    font_size:'15sp'
+    font_size:'34sp'
 
 #plantilla para hacer un texto con Scroll (para textos muy largos)
 
@@ -25,6 +25,7 @@
             height: self.texture_size[1]
             text_size: self.width, None
             text: root.text #el text de arriba
+            font_size: '34sp'
             color: [0,0,0,.7]
 
 <ui>:
@@ -46,7 +47,7 @@
                 pos_hint: {'center_y': .5}
                 theme_text_color: 'Custom'
                 text_color: 1,1,1,1
-                font_style: 'H5'
+                font_style: 'H2'
 
             Image:
                 source: "images/mano_robot.png"
@@ -59,7 +60,7 @@
                 pos_hint: {'center_y': .5}
                 theme_text_color: 'Custom'
                 text_color: 1,1,1,1
-                font_style: 'Subtitle1'
+                font_style: 'H3'
             
             MDFillRoundFlatButton:
                 text: '¡EMPIEZA YA!'
@@ -67,6 +68,7 @@
                 text_color: 1,0.6758,.0938,1
                 md_bg_color: 1,1,0.149, 1
                 pos_hint: {'center_x': .5}
+                font_style: 'H4'
                 on_release:
                     app.root.transition = SlideTransition(direction='left')
                     app.root.current= 'menu'
@@ -80,6 +82,7 @@
         
         MDIconButton:
             icon: 'arrow-left'
+            icon_size:'35sp'
             pos_hint: {'center_x': 0.09,'center_y': .95}
             theme_icon_color: "Custom"
             icon_color: 0.1992, 0.6602, 0.7070, 1
@@ -96,17 +99,17 @@
                     Color:
                         rgba: 0.1992, 0.6602, 0.7070, .2
                     Ellipse:
-                        pos: -15, 400
-                        size: 300 , 200
+                        pos: -80, 1080
+                        size: 900 , 600
                         angle_start: 0
                         angle_end: 360
                 MDLabel:
-                    text: '¿QUÉ QUIERES HACER?'
+                    text: '¿QUÉ QUIERES \n HACER?\n'
                     halign: 'center'
-                    pos_hint: {'center_x': .5, 'center_y': .75}
+                    pos_hint: {'center_x': .5, 'center_y': .80}
                     theme_text_color: 'Custom'
                     text_color: .0235, .5686, .5255, 1
-                    font_style: 'H5'
+                    font_style: 'H2'
 
         Caja:
             pos_hint: {'center_x':.5, 'center_y': .6}
@@ -142,6 +145,7 @@
         
         MDIconButton:
             icon: 'information'
+            icon_size: '35sp'
             pos_hint: {"center_x": .91, "center_y": .05}
             theme_icon_color: "Custom"
             icon_color: 0.1992, 0.6602, 0.7070, 1
@@ -159,69 +163,70 @@
         MDIconButton:
             icon: 'arrow-left'
             pos_hint: {'center_x': 0.09,'center_y': .95}
+            icon_size: '35sp'
             theme_icon_color: "Custom"
             icon_color: 0.1992, 0.6602, 0.7070, 1
             on_release:
                 app.root.transition = SlideTransition(direction = 'right')
                 app.root.current = 'menu'
         
-        MDBoxLayout:
-            orientation: 'vertical'
-            padding: ['10dp', '10dp', '10dp', '280px']
-            
-            FloatLayout:
-                canvas:
-                    Color:
-                        rgba: 0.1992, 0.6602, 0.7070, .2
-                    Ellipse:
-                        pos: -15, 400
-                        size: 300 , 200
-                        angle_start: 0
-                        angle_end: 360
+        FloatLayout:
+            canvas:
+                Color:
+                    rgba: 0.1992, 0.6602, 0.7070, .2
+                Ellipse:
+                    pos: -80, 1080
+                    size: 900 , 600
+                    angle_start: 0
+                    angle_end: 360
             MDLabel:
-                text: "ESCRIBE TU\nMENSAJE\n\n\n\n\n\n"
+                text: "ESCRIBE TU \n MENSAJE"
                 halign: 'center'
-                pos_hint: {'center_y': 1}
+                pos_hint: {'center_x': .5, 'center_y': .85}
                 theme_text_color: 'Custom'
                 text_color: .0235, .5686, .5255, 1
-                font_style: 'H5'
-            
-            MDTextField:
-                id: mensaje
-                mode: 'fill'
-                radius: [15,15,15,15]
-                helper_text: 'Escribe un mensaje'
-                helper_text_mode: 'persistent'
-                active_line: True
-                max_text_length: 160 #sugerido, para que el mensaje no sea tan largo
-                on_text_validate: app.root.textInput(self)
-                font_size: '14dp'
-                #Color de la linea
-                line_color_normal: .0235, .5686, .5255, 1
-                line_color_focus: .0235, .5686, .5255, 1
-                #Color del texto
-                text_color_normal: 0, 0, 0, .5
-                text_color_focus: 0, 0, 0, .5
-                helper_text_color_normal: 0, 0, 0, .5
-                helper_text_color_focus: 0, 0, 0, .5
-                #Color de fondo
-                fill_color_normal: .9647, .9647, .9647, 1
+                font_style: 'H2'
+            BoxLayout:
+                padding: 20
+                MDTextField:
+                    id: mensaje
+                    pos_hint: {'center_x': .5, 'center_y': .5}
+                    mode: 'fill'
+                    radius: [15,15,15,15]
+                    helper_text: 'Escribe un mensaje'
+                    helper_text_mode: 'persistent'
+                    active_line: True
+                    max_text_length: 160 #sugerido, para que el mensaje no sea tan largo
+                    on_text_validate: app.root.textInput(self)
+                    font_size: '34dp'
+                    #Color de la linea
+                    line_color_normal: .0235, .5686, .5255, 1
+                    line_color_focus: .0235, .5686, .5255, 1
+                    #Color del texto
+                    text_color_normal: 0, 0, 0, .5
+                    text_color_focus: 0, 0, 0, .5
+                    helper_text_color_normal: 0, 0, 0, .5
+                    helper_text_color_focus: 0, 0, 0, .5
+                    #Color de fondo
+                    fill_color_normal: .9647, .9647, .9647, 1
 
         MDFillRoundFlatButton:
             text: 'ENVIAR'
-            pos_hint: {'center_x': .5, 'center_y':.25}
+            pos_hint: {'center_x': .5, 'center_y':.45}
             theme_text_color: 'Custom'
+            font_size: '24dp'
             text_color: 1,1,1,1
             md_bg_color: 0.1992, 0.6602, 0.7070, 1
             on_release:
                 app.root.textInput(mensaje)
         MDLabel:
-            text: '*Recuerda que tu mensaje no va a ser\n traducido directamente a lengua de señas,\n sino que se va a deletrear cada letra.'
-            halign: 'left'
-            pos_hint: {'center_y': 0.09, 'center_x':0.56}
+            text: '*Recuerda que tu mensaje no va a ser traducido directamente a lengua de señas, sino que se va a deletrear cada letra.'
+            halign: 'center'
+            font_size: '24dp'
+            pos_hint: {'center_y': 0.35, 'center_x':0.5}
             theme_text_color: 'Custom'
             text_color: 0, 0, 0, .5
-            font_style: 'Caption'
+        
         
 #Pantalla Historia    
     
@@ -234,6 +239,7 @@
             icon: 'arrow-left'
             pos_hint: {'center_x': 0.09,'center_y': .95}
             theme_icon_color: "Custom"
+            icon_size: '35sp'
             icon_color: .0235, .5686, .5255, 1
             on_release:
                 app.root.transition = SlideTransition(direction = 'right')
@@ -244,18 +250,18 @@
                 Color:
                     rgba: 0.1992, 0.6602, 0.7070, .2
                 Ellipse:
-                    pos: -15, 400
-                    size: 300 , 200
+                    pos: -80, 1080
+                    size: 900 , 600
                     angle_start: 0
                     angle_end: 360
             
             MDLabel:
-                text: 'HISTORIA DE LA LENGUA DE SEÑAS'
+                text: 'HISTORIA DE LA \n LENGUA DE SEÑAS'
                 halign: 'center'
-                pos_hint: {'center_x': .5, 'center_y': .89}
+                pos_hint: {'center_x': .5, 'center_y': .85}
                 theme_text_color: 'Custom'
                 text_color: .0235, .5686, .5255, 1
-                font_style: 'H5'
+                font_style: 'H2'
         
         MDBoxLayout:
             orientation: 'vertical'
@@ -263,11 +269,12 @@
             
             LabelScroll:
                 text: "La lengua de señas colombiana fue reconocida oficialmente en el año 1996, durante el gobierno de Ernesto Samper, a través de la Ley 324 de 1996.\n\nEn 1984 empezó la creación de un grupo de investigación cuyo propósito fue la elaboración de lo que, en un principio, se llamó el lenguaje manual colombiano.\n\nDe estos primeros pasos y la enseñanza de dicha lengua, salieron las primeras cartillas realizadas por la Federación Nacional de Sordos de Colombia (también conocida como Fenascol), publicadas inicialmente en 1993.\n\nDespués de estas primeras cartillas, más personas se unieron a esta iniciativa, avanzando en la investigación.\n\nPor tanto, el tomo dos inicia con la aclaración que la correcta denominación es Lenguaje de señas colombiano.\n\nGracias a esto y al trabajo entre el INSOR (Instituto Nacional para Sordos), el Instituto Caro y Cuervo y Fenascol, en 2006 se publica el Diccionario Básico de la lengua de señas colombiana."
-                padding: [0, '130px', 0, '10px']
+                padding: [0, '390px', 0, '50px']
 
             MDFillRoundFlatButton:
                 md_bg_color: 0.1992, 0.6602, 0.7070, 1
                 text: 'Haz click para conocer la fuente'
+                font_size: '25sp'
                 on_release:
                     import webbrowser
                     webbrowser.open('https://lenguasdecolombia.caroycuervo.gov.co/contenido/Lenguas-de-senas-colombiana/introduccion#:~:text=La%20lengua%20de%20se%C3%B1as%20colombiana%20es%20la%20lengua%20utilizada%20por,Pizano%2C%20mediante%20la%20Ley%20324.')
@@ -281,6 +288,7 @@
         
         MDIconButton:
             icon: 'arrow-left'
+            icon_size: '35sp'
             pos_hint: {'center_x': 0.09,'center_y': .95}
             theme_icon_color: "Custom"
             icon_color: .0235, .5686, .5255, 1
@@ -293,29 +301,29 @@
                 Color:
                     rgba: 0.1992, 0.6602, 0.7070, .2
                 Ellipse:
-                    pos: -15, 400
-                    size: 300 , 200
+                    pos: -80, 1080
+                    size: 900 , 600
                     angle_start: 0
                     angle_end: 360
             
             MDLabel:
                 text: 'ACERCA DE LA\nLENGUA DE SEÑAS'
                 halign: 'center'
-                pos_hint: {'center_x': .5, 'center_y': .89}
+                pos_hint: {'center_x': .5, 'center_y': .85}
                 theme_text_color: 'Custom'
                 text_color: .0235, .5686, .5255, 1
-                font_style: 'H5'
+                font_style: 'H2'
                     
         MDBoxLayout:
             orientation: 'vertical'
-            padding: ['17dp', '115px', '17dp', '17dp']
+            padding: ['17dp', '50px', '17dp', '17dp']
 
             MDLabel:
                 text: "La lengua de señas es la lengua natural de las personas con discapacidad auditiva.\n\nSe basa en movimientos y expresiones de las manos, la cara y el cuerpo. A estos movimientos se les denomina señas.\n\nMuchas personas con discapacidad auditiva se comunican a través de esta lengua y en algunos casos, necesitan de un interprete para relacionarse con oyentes que no la conocen.\n\nEn Colombia se le llama Lengua de Señas Colombiana."
                 halign: 'justify'
                 theme_text_color: 'Custom'
                 text_color: .0, .0, .0, 0.7
-                font_size:'14sp'
+                font_size:'34sp'
                 
 #Pantalla boton informacion
 
@@ -326,6 +334,7 @@
 
         MDIconButton:
             icon: 'arrow-left'
+            icon_size: '35sp'
             pos_hint: {'center_x': 0.09,'center_y': .95}
             theme_icon_color: "Custom"
             icon_color: 0.1992, 0.6602, 0.7070, 1
@@ -338,8 +347,8 @@
                 Color:
                     rgba: 0.1992, 0.6602, 0.7070, .2
                 Ellipse:
-                    pos: -15, 400
-                    size: 300 , 200
+                    pos: -80, 1080
+                    size: 900 , 600
                     angle_start: 0
                     angle_end: 360
             
@@ -349,7 +358,7 @@
                 pos_hint: {'center_x': .5, 'center_y': .87}
                 theme_text_color: 'Custom'
                 text_color: .0235, .5686, .5255, 1
-                font_style: 'H5'
+                font_style: 'H2'
                     
         MDBoxLayout:
             orientation: 'vertical'
@@ -358,9 +367,10 @@
             MDLabel:
                 text: "Roboto es una mano robótica que toma texto escrito por ti y lo deletrea utilizando el abecedario en lengua de señas colombiana. \n\nHaz click en el botón EXPERIMENTA CREANDO UN MENSAJE para enviar un mensaje a Roboto para que lo deletree. \n\nSi quieres ver la seña correspondiente a cada letra, puedes dar click en el botón CONOCE EL ABECEDARIO.\n\nPara conocer más acerca de la lengua de señas, da click en el botón CONOCE UN POCO DE HISTORIA o CONOCE MÁS SOBRE LA LENGUA DE SEÑAS."
                 halign: 'justify'
+                font_size: '34sp'
                 theme_text_color: 'Custom'
                 text_color: .0, .0, .0, 0.7
-                font_size:'14sp'
+                font_size:'34sp'
 
 #Pantalla abecedario
      
@@ -373,6 +383,7 @@
             icon: 'arrow-left'
             pos_hint: {'center_x': 0.09,'center_y': 0.95}
             theme_icon_color: "Custom"
+            icon_size: '35sp'
             icon_color: 0.1992, 0.6602, 0.7070, 1
             on_release:
                 app.root.transition = SlideTransition(direction = 'right')
@@ -383,8 +394,8 @@
                 Color:
                     rgba: 0.1992, 0.6602, 0.7070, .2
                 Ellipse:
-                    pos: -15, 400
-                    size: 300 , 200
+                    pos: -80, 1080
+                    size: 900 , 600
                     angle_start: 0
                     angle_end: 360
          
@@ -394,11 +405,11 @@
                 pos_hint: {'center_x': .5, 'center_y': .87}
                 theme_text_color: 'Custom' 
                 text_color: .0235, .5686, .5255, 1
-                font_style: 'H5'
+                font_style: 'H2'
 
         MDBoxLayout:
             orientation: 'vertical'
-            padding: ['20dp', '140px', '20dp', '20dp']
+            padding: ['20dp', '400px', '20dp', '20dp']
 
             ScrollView:
                 GridLayout:
@@ -412,181 +423,181 @@
                     MDAnchorLayout:
                         MDIconButton:
                             icon: "images/A.png"
-                            icon_size: "85sp"
+                            icon_size: "185sp"
                             on_release:
                                 app.root.buttonInput("A")
                             
                     MDAnchorLayout:
                         MDIconButton:
                             icon: "images/B.png"
-                            icon_size: "85sp"
+                            icon_size: "185sp"
                             on_release:
                                 app.root.buttonInput("B")
                         
                     MDAnchorLayout:
                         MDIconButton:
                             icon: "images/C.png"
-                            icon_size: "85sp"
+                            icon_size: "185sp"
                             on_release:
                                 app.root.buttonInput("C")
 
                     MDAnchorLayout:
                         MDIconButton:
                             icon: "images/D.png"
-                            icon_size: "85sp"
+                            icon_size: "185sp"
                             on_release:
                                 app.root.buttonInput("D")
                     
                     MDAnchorLayout:
                         MDIconButton:
                             icon: "images/E.png"
-                            icon_size: "85sp"
+                            icon_size: "185sp"
                             on_release:
                                 app.root.buttonInput("E")
                     
                     MDAnchorLayout:
                         MDIconButton:
                             icon: "images/F.png"
-                            icon_size: "85sp"
+                            icon_size: "185sp"
                             on_release:
                                 app.root.buttonInput("F")
 
                     MDAnchorLayout:
                         MDIconButton:
                             icon: "images/G.png"
-                            icon_size: "85sp"
+                            icon_size: "185sp"
                             on_release:
                                 app.root.buttonInput("G")
                         
                     MDAnchorLayout:
                         MDIconButton:
                             icon: "images/H.png"
-                            icon_size: "85sp"
+                            icon_size: "185sp"
                             on_release:
                                 app.root.buttonInput("H")
 
                     MDAnchorLayout:
                         MDIconButton:
                             icon: "images/I.png"
-                            icon_size: "85sp"
+                            icon_size: "185sp"
                             on_release:
                                 app.root.buttonInput("I")
                     
                     MDAnchorLayout:
                         MDIconButton:
                             icon: "images/J.png"
-                            icon_size: "85sp"
+                            icon_size: "185sp"
                             on_release:
                                 app.root.buttonInput("J")
                             
                     MDAnchorLayout:
                         MDIconButton:
                             icon: "images/K.png"
-                            icon_size: "85sp"
+                            icon_size: "185sp"
                             on_release:
                                 app.root.buttonInput("K")
 
                     MDAnchorLayout:
                         MDIconButton:
                             icon: "images/L.png"
-                            icon_size: "85sp"
+                            icon_size: "185sp"
                             on_release:
                                 app.root.buttonInput("L")
                         
                     MDAnchorLayout:
                         MDIconButton:
                             icon: "images/M.png"
-                            icon_size: "85sp"
+                            icon_size: "185sp"
                             on_release:
                                 app.root.buttonInput("M")
 
                     MDAnchorLayout:
                         MDIconButton:
                             icon: "images/N.png"
-                            icon_size: "85sp"
+                            icon_size: "185sp"
                             on_release:
                                 app.root.buttonInput("N")
                     
                     MDAnchorLayout:
                         MDIconButton:
                             icon: "images/O.png"
-                            icon_size: "85sp"
+                            icon_size: "185sp"
                             on_release:
                                 app.root.buttonInput("O")
                             
                     MDAnchorLayout:
                         MDIconButton:
                             icon: "images/P.png"
-                            icon_size: "85sp"
+                            icon_size: "185sp"
                             on_release:
                                 app.root.buttonInput("P")
 
                     MDAnchorLayout:
                         MDIconButton:
                             icon: "images/Q.png"
-                            icon_size: "85sp"
+                            icon_size: "185sp"
                             on_release:
                                 app.root.buttonInput("Q")
                         
                     MDAnchorLayout:
                         MDIconButton:
                             icon: "images/R.png"
-                            icon_size: "85sp"
+                            icon_size: "185sp"
                             on_release:
                                 app.root.buttonInput("R")
 
                     MDAnchorLayout:
                         MDIconButton:
                             icon: "images/S.png"
-                            icon_size: "85sp"
+                            icon_size: "185sp"
                             on_release:
                                 app.root.buttonInput("S")
                     
                     MDAnchorLayout:
                         MDIconButton:
                             icon: "images/T.png"
-                            icon_size: "85sp"
+                            icon_size: "185sp"
                             on_release:
                                 app.root.buttonInput("T")
                             
                     MDAnchorLayout:
                         MDIconButton:
                             icon: "images/U.png"
-                            icon_size: "85sp"
+                            icon_size: "185sp"
                             on_release:
                                 app.root.buttonInput("U")
 
                     MDAnchorLayout:
                         MDIconButton:
                             icon: "images/V.png"
-                            icon_size: "85sp"
+                            icon_size: "185sp"
                             on_release:
                                 app.root.buttonInput("V")
                         
                     MDAnchorLayout:
                         MDIconButton:
                             icon: "images/W.png"
-                            icon_size: "85sp"
+                            icon_size: "185sp"
                             on_release:
                                 app.root.buttonInput("W")
 
                     MDAnchorLayout:
                         MDIconButton:
                             icon: "images/X.png"
-                            icon_size: "85sp"
+                            icon_size: "185sp"
                             on_release:
                                 app.root.buttonInput("X")
                     
                     MDAnchorLayout:
                         MDIconButton:
                             icon: "images/Y.png"
-                            icon_size: "85sp"
+                            icon_size: "185sp"
                             on_release:
                                 app.root.buttonInput("Y")
                             
                     MDAnchorLayout:
                         MDIconButton:
                             icon: "images/Z.png"
-                            icon_size: "85sp"
+                            icon_size: "185sp"
                             on_release:
                                 app.root.buttonInput("Z")

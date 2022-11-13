@@ -21,16 +21,16 @@ class Ui(ScreenManager):
         else:
             self.ids.mensaje.helper_text = '¡No envíes un mensaje vacío!'
 
-   def buttonInput(self, string):
+    def buttonInput(self, string):
         self.message = string.lower()
-        try:
-            seriall = serial.Serial("com3",9600)
-            seriall.write(self.message)
+        #try:
+        #    seriall = serial.Serial("com3",9600)
+        #    seriall.write(self.message)
 
-        except TimeoutError:
-            print("error")
-        finally:
-            print("done")
+        #except TimeoutError:
+            #print("error")
+        #finally:
+        #    print("done")
 
         print(self.message)
 
