@@ -2,8 +2,9 @@ from kivymd.app import MDApp
 from kivy.uix.screenmanager import ScreenManager
 from kivy.lang import Builder
 from kivy.core.window import Window
-import string
-import unidecode
+import serial
+#import string
+#import unidecode
 
 Window.size=(720,1480)
 
@@ -12,7 +13,8 @@ class Ui(ScreenManager):
     
     def textInput(self, widget):
         if widget.text!='' and len(widget.text)<=160:
-            self.message = unidecode.unidecode(widget.text.lower().translate(str.maketrans('', '', string.punctuation)))
+            #self.message = unidecode.unidecode(widget.text.lower().translate(str.maketrans('', '', string.punctuation)))
+            self.message = widget.text
             print(self.message)
             self.ids.mensaje.helper_text = 'Escribe un mensaje'
             self.ids.mensaje.text = ''
@@ -23,14 +25,16 @@ class Ui(ScreenManager):
 
     def buttonInput(self, string):
         self.message = string.lower()
-        #try:
-        #    seriall = serial.Serial("com3",9600)
-        #    seriall.write(self.message)
+        try:
+            seriall = serial.Serial("com13",9600)
+            seriall.write(self.message)
+            
 
-        #except TimeoutError:
-            #print("error")
-        #finally:
-        #    print("done")
+            
+        except TimeoutError:
+            print("error")
+        finally:
+            print("done")
 
         print(self.message)
 
