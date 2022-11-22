@@ -1,6 +1,7 @@
 #include <SoftwareSerial.h>
 #include <Servo.h>
 #include <LedControl.h>
+#define demora 1000
 
 int pin_pulgar = 5;
 int pin_indice = 6;
@@ -9,6 +10,7 @@ int pin_anular = 11;
 int pin_menique = 10;
 
 LedControl lc=LedControl(8,7,4,1);
+LedControl led = LedControl(DIN, CLK, CS, 1);
 SoftwareSerial BTSerial(2,3);
 
 Servo pulgar;
@@ -16,6 +18,14 @@ Servo indice;
 Servo corazon;
 Servo anular;
 Servo menique;
+
+byte arriba[8]= {B00011000, B00111100, B01111110, B11111111, B00011000, B00011000, B00011000, B00011000};
+
+byte abajo[8] = {B00011000, B00011000, B00011000, B00011000, B11111111, B01111110, B00111100, B00011000};
+
+byte izquierda[8] = {B00011000, B00011100, B00011110, B11111111, B11111111, B00011110, B00011100, B00011000};
+
+byte derecha[8] = {B00011000, B00111000, B01111000, B11111111, B11111111, B01111000, B00111000, B00011000};
 
 void cerrar_todo(Servo dedo){
   for(int i=0; i<180; i++){
@@ -46,6 +56,30 @@ void abrir_toda_la_mano(){
     abrir_todo(menique);
 }
 
+void f_arriba () {
+  for (int i = 0; i < 8; i++){
+    led.setRow(0, i, arriba[i]);
+  }
+}
+
+void f_abajo () {
+  for (int i = 0; i < 8; i++){
+    led.setRow(0, i, abajo[i]);
+  }
+}
+
+void f_izq () {
+  for (int i = 0; i < 8; i++){
+    led.setRow(0, i, izquierda[i]);
+  }
+}
+
+void f_der () {
+  for (int i = 0; i < 8; i++){
+    led.setRow(0, i, derecha[i]);
+  }
+}
+
 void a(){
   abrir_toda_la_mano();
   
@@ -58,6 +92,7 @@ void a(){
   lc.setRow(0,5,A[5]);
   lc.setRow(0,6,A[6]);
   lc.setRow(0,7,A[7]);
+  f_arriba();
   
   cerrar_todo(menique);
   cerrar_todo(anular);
@@ -79,6 +114,7 @@ void b(){
   lc.setRow(0,5,B[5]);
   lc.setRow(0,6,B[6]);
   lc.setRow(0,7,B[7]);
+  f_arriba();
   
   cerrar_todo(pulgar);
   
@@ -97,6 +133,7 @@ void c(){
   lc.setRow(0,5,C[5]);
   lc.setRow(0,6,C[6]);
   lc.setRow(0,7,C[7]);
+  f_arriba();
   
   cerrar_parcial(menique);
   cerrar_parcial(anular);
@@ -119,6 +156,7 @@ void d(){
   lc.setRow(0,5,D[5]);
   lc.setRow(0,6,D[6]);
   lc.setRow(0,7,D[7]);
+  f_arriba();
   
   cerrar_todo(menique);
   cerrar_todo(anular);
@@ -140,6 +178,7 @@ void e(){
   lc.setRow(0,5,E[5]);
   lc.setRow(0,6,E[6]);
   lc.setRow(0,7,E[7]);
+  f_arriba();
   
   cerrar_todo(menique);
   cerrar_todo(anular);
@@ -162,6 +201,7 @@ void f(){
   lc.setRow(0,5,f[5]);
   lc.setRow(0,6,f[6]);
   lc.setRow(0,7,f[7]);
+  f_arriba();
   
   cerrar_parcial(indice);
   cerrar_parcial(pulgar);
@@ -181,6 +221,10 @@ void g(){
   lc.setRow(0,5,G[5]);
   lc.setRow(0,6,G[6]);
   lc.setRow(0,7,G[7]);
+  f_abajo();
+  delay(demora);
+  f_der();
+  delay(demora);
   
   cerrar_todo(menique);
   cerrar_todo(anular);
@@ -201,6 +245,8 @@ void h(){
   lc.setRow(0,5,H[5]);
   lc.setRow(0,6,H[6]);
   lc.setRow(0,7,H[7]);
+  f_der();
+  delay(demora);
   
   cerrar_todo(menique);
   cerrar_todo(anular);
@@ -220,6 +266,7 @@ void I(){
   lc.setRow(0,5,I[5]);
   lc.setRow(0,6,I[6]);
   lc.setRow(0,7,I[7]);
+  f_arriba();
   
   cerrar_todo(indice);
   cerrar_todo(corazon);
@@ -241,6 +288,7 @@ void j(){
   lc.setRow(0,5,J[5]);
   lc.setRow(0,6,J[6]);
   lc.setRow(0,7,J[7]);
+  f_abajo();
   
   cerrar_todo(indice);
   cerrar_todo(corazon);
@@ -262,6 +310,7 @@ void k(){
   lc.setRow(0,5,K[5]);
   lc.setRow(0,6,K[6]);
   lc.setRow(0,7,K[7]);
+  f_der();
   
   cerrar_parcial(pulgar);
   cerrar_todo(menique);
@@ -282,6 +331,7 @@ void l(){
   lc.setRow(0,5,L[5]);
   lc.setRow(0,6,L[6]);
   lc.setRow(0,7,L[7]);
+  f_arriba();
   
   cerrar_todo(menique);
   cerrar_todo(anular);
@@ -302,6 +352,7 @@ void m(){ //hay que tener en cuenta que el pulgar en teoría debe estar entre me
   lc.setRow(0,5,M[5]);
   lc.setRow(0,6,M[6]);
   lc.setRow(0,7,M[7]);
+  f_abajo();
 
   cerrar_todo(pulgar);
   cerrar_todo(menique);
@@ -324,6 +375,7 @@ void n(){ //hay que tener en cuenta que el pulgar en teoría debe estar entre an
   lc.setRow(0,5,N[5]);
   lc.setRow(0,6,N[6]);
   lc.setRow(0,7,N[7]);
+  f_abajo();
   
   cerrar_todo(pulgar);
   cerrar_todo(menique);
@@ -346,6 +398,7 @@ void o(){ //no sé como hacer para diferenciar de la c
   lc.setRow(0,5,O[5]);
   lc.setRow(0,6,O[6]);
   lc.setRow(0,7,O[7]);
+  f_arriba();
   
   cerrar_parcial(menique);
   cerrar_parcial(anular);
@@ -368,6 +421,7 @@ void p(){
   lc.setRow(0,5,P[5]);
   lc.setRow(0,6,P[6]);
   lc.setRow(0,7,P[7]);
+  f_abajo();
   
   cerrar_todo(menique);
   cerrar_todo(anular);
@@ -389,6 +443,7 @@ void q(){
   lc.setRow(0,5,Q[5]);
   lc.setRow(0,6,Q[6]);
   lc.setRow(0,7,Q[7]);
+  f_arriba();
   
   cerrar_todo(menique);
   cerrar_todo(anular);
@@ -410,6 +465,7 @@ void r(){
   lc.setRow(0,5,R[5]);
   lc.setRow(0,6,R[6]);
   lc.setRow(0,7,R[7]);
+  f_arriba();
   
   cerrar_todo(menique);
   cerrar_todo(anular);
@@ -431,6 +487,7 @@ void s(){
   lc.setRow(0,5,S[5]);
   lc.setRow(0,6,S[6]);
   lc.setRow(0,7,S[7]);
+  f_arriba();
   
   cerrar_todo(menique);
   cerrar_todo(anular);
@@ -453,6 +510,7 @@ void t(){
   lc.setRow(0,5,T[5]);
   lc.setRow(0,6,T[6]);
   lc.setRow(0,7,T[7]);
+  f_arriba();
   
   cerrar_todo(menique);
   cerrar_todo(anular);
@@ -474,6 +532,7 @@ void u(){ //los dedos que no se extienden van pegados
   lc.setRow(0,5,U[5]);
   lc.setRow(0,6,U[6]);
   lc.setRow(0,7,U[7]);
+  f_arriba();
 
   cerrar_todo(menique);
   cerrar_todo(anular);
@@ -494,6 +553,7 @@ void v(){ //los dedos que no se extienden van despegados
   lc.setRow(0,5,V[5]);
   lc.setRow(0,6,V[6]);
   lc.setRow(0,7,V[7]);
+  f_arriba();
   
   cerrar_todo(menique);
   cerrar_todo(anular);
@@ -514,6 +574,7 @@ void w(){
   lc.setRow(0,5,W[5]);
   lc.setRow(0,6,W[6]);
   lc.setRow(0,7,W[7]);
+  f_arriba();
   
   cerrar_todo(menique);
   cerrar_todo(pulgar);  
@@ -533,6 +594,7 @@ void x(){
   lc.setRow(0,5,X[5]);
   lc.setRow(0,6,X[6]);
   lc.setRow(0,7,X[7]);
+  f_arriba();
   
   cerrar_todo(pulgar);
   cerrar_todo(menique);
@@ -555,6 +617,7 @@ void y(){
   lc.setRow(0,5,Y[5]);
   lc.setRow(0,6,Y[6]);
   lc.setRow(0,7,Y[7]);
+  f_arriba();
   
   cerrar_todo(anular);
   cerrar_todo(corazon);
@@ -575,6 +638,7 @@ void z(){
   lc.setRow(0,5,Z[5]);
   lc.setRow(0,6,Z[6]);
   lc.setRow(0,7,Z[7]);
+  f_arriba();
   
   cerrar_todo(menique);
   cerrar_todo(anular);
@@ -593,6 +657,9 @@ void setup() {
   lc.shutdown(0,false);
   lc.setIntensity(0,8);
   lc.clearDisplay(0);
+  led.shutdown(0, false);
+  led.setIntensity(0,8);
+  led.clearDisplay(0);
   Serial.begin(9600);
   BTSerial.begin(9600);
   abrir_toda_la_mano();
